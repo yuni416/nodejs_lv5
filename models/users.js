@@ -35,6 +35,10 @@ module.exports = (sequelize, DataTypes) => {
         sourceKey: "nickname",
         foreignKey: "Nickname",
       });
+      this.hasMany(models.Likes, {
+        targetKey: "nickname",
+        foreignKey: "Nickname",
+      });
     }
   }
 

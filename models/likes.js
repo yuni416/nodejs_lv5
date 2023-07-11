@@ -17,6 +17,18 @@ module.exports = (sequelize, DataTypes) => {
         targetKey: "postId",
         foreignKey: "PostId",
       });
+      this.belongsTo(models.Users, {
+        targetKey: "nickname",
+        foreignKey: "Nickname",
+      });
+      this.belongsTo(models.Posts, {
+        targetKey: "title",
+        foreignKey: "Title",
+      });
+      this.belongsTo(models.Posts, {
+        targetKey: "createdAt",
+        foreignKey: "CreatedAt",
+      });
     }
   }
   Likes.init(
@@ -31,6 +43,15 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
       PostId: {
+        type: DataTypes.INTEGER,
+      },
+      Nickname: {
+        type: DataTypes.INTEGER,
+      },
+      Title: {
+        type: DataTypes.INTEGER,
+      },
+      CreatedAt: {
         type: DataTypes.INTEGER,
       },
     },

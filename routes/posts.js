@@ -4,7 +4,7 @@ const router = express.Router();
 const authMiddleware = require("../middlewares/auth-middleware");
 exports.router = router;
 
-const { Posts } = require("../models");
+const { Posts, Likes } = require("../models");
 
 router
   .route("/posts")
@@ -39,8 +39,11 @@ router
         "userId",
       ],
     });
+    const likes = await Likes.findAll({
+      attributes: [likes.length],
+    });
     //json화+data값에 넣어주는 작업
-    res.json({ data: results });
+    res.json({ data: (results, likes) });
   })
 
   //게시글 작성
@@ -65,7 +68,10 @@ router
         where: { postId: postId },
         attributes: ["postId", "nickname", "title", "content", "createdAt"],
       });
-      res.status(200).json({ data: results });
+      const likes = await Likes.findAll({
+        attributes: [likes.length],
+      });
+      res.status(200).json({ data: (results, likes) });
     } catch {
       res
         .status(400)
